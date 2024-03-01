@@ -84,6 +84,11 @@ main {
   color: black;
 }
 
+.ad_square.bomb{
+  background-color: black;
+  color: white;
+}
+
 .sidebar {
   width: 30px;
   height: 100%;

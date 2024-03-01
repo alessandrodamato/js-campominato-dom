@@ -4,6 +4,8 @@ const grid = document.querySelector('.ad_grid');
 const difficultyOption = document.getElementById('mode');
 
 let nGrid;
+let arrayBombs;
+let bombIndex;
 
 // reset base
 reset();
@@ -14,7 +16,7 @@ btnPlay.addEventListener('click', init)
 
 //////////// FUNCTIONS ////////////
 
-function generateSquares (index) {
+function generateSquares (index, bIndex) {
   const sq = document.createElement('div');
   sq.className = 'ad_square';
   grid.append(sq);
@@ -25,11 +27,16 @@ function generateSquares (index) {
     sq.classList.add('hard')
     
   } else if (nGrid === 81) {
-        
-      sq.classList.add('medium')
-
+    
+    sq.classList.add('medium')
+    
   }
   
+  // controllo se è una bomba
+  if (bIndex.includes(index)) {
+    sq.classList.add('bomb')
+  }
+
   // al click del singolo quadrato
   sq.addEventListener('click', function(){
     
@@ -47,8 +54,10 @@ function init () {
   reset();
   nGrid = difficultyGrid();
   bombRandomizer();
+
+  //stampa quadrati
   for (let i = 1; i <= nGrid; i++) {
-    generateSquares(i);
+    generateSquares(i, arrayBombs);
   }
 
 }
@@ -76,7 +85,7 @@ function difficultyGrid () {
 
 function bombRandomizer () {
 
-  let arrayBombs = [];
+  arrayBombs = [];
   const nBombs = 16;
   
   do {
@@ -91,5 +100,4 @@ function bombRandomizer () {
   console.log(arrayBombs);
 
   return arrayBombs;
-
 }
