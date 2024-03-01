@@ -78,23 +78,18 @@ function bombRandomizer () {
 
   let arrayBombs = [];
   const nBombs = 16;
-
-  while (arrayBombs.length === nBombs) {
-
-    randomNumber = numRandomizer();
-
-    if (!arrayBombs.includes(randomNumber)) {
-      arrayBombs.push(randomNumber);
+  
+  do {
+    
+    const randomNumber = Math.ceil(Math.random() * nGrid);
+    if (!arrayBombs.includes(randomNumber)) { 
+      arrayBombs.push(randomNumber)
     }
-
-  }
-
+    
+  } while (arrayBombs.length !== nBombs);
+  
   console.log(arrayBombs);
 
+  return arrayBombs;
 
-}
-
-function numRandomizer () {
-  const randomNumber = Math.ceil(Math.random() * nGrid);
-  return randomNumber;
 }
