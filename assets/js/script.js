@@ -10,6 +10,7 @@ let arrayBombs;
 let bombIndex;
 let counter = 0;
 let winCondition;
+let bombfield;
 
 
 // reset base
@@ -51,7 +52,9 @@ function generateSquares (index, bIndex) {
 
     // controllo se è una bomba
     if (bIndex.includes(index)) {
-      sq.classList.add('bomb')
+      for (let i = 0; i < arrayBombs.length; i++) {
+        document.getElementsByClassName('ad_square')[arrayBombs[i] - 1].classList.add('bomb');
+      }
       winCondition = false;
       endGame(winCondition);
     }
@@ -127,10 +130,13 @@ function bombRandomizer () {
 }
 
 function endGame (cond) {
+  const blockScreen = document.createElement('div');
+  blockScreen.className = 'ad_block';
 
   if (cond) {
     message.innerHTML = `Hai Vinto! Punteggio: ${counter} su ${nGrid - nBombs}`;
   } else {
     message.innerHTML = `Hai Perso :( Punteggio: ${counter} su ${nGrid - nBombs}`;
   }
+  
 }
