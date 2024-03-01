@@ -15,7 +15,7 @@ header{
   height: 100%;
 }
 
-h1, label{
+h1, h2, label{
   color: rgb(250, 0, 8);
   text-shadow: 5px 5px 20px rgb(107, 0, 2);
 }
@@ -53,7 +53,6 @@ main {
   justify-content: flex-end;
   height: calc(100% - 100px);
   aspect-ratio: 1 / 1;
-  background-color: rgb(250, 0, 8);
 }
 
 .ad_square{
@@ -63,7 +62,6 @@ main {
   justify-content: center;
   align-items: center;
   background-color: greenyellow;
-  color: white;
   border: 1px solid black;
 }
 
@@ -81,12 +79,14 @@ main {
 
 .ad_square.clicked{
   background-color: aqua;
-  color: black;
 }
 
 .ad_square.bomb{
   background-color: rgb(73, 35, 0);
-  color: white;
+}
+
+.ad_square.bomb-cheats{
+  background-color: white;
 }
 
 .sidebar {

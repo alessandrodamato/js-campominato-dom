@@ -1,12 +1,16 @@
 // elements
 const btnPlay = document.querySelector('.btn-play');
 const grid = document.querySelector('.ad_grid');
+const message = document.querySelector('.message');
 const difficultyOption = document.getElementById('mode');
 
+const nBombs = 16;
 let nGrid;
 let arrayBombs;
 let bombIndex;
 let counter = 0;
+let winCondition;
+
 
 // reset base
 reset();
@@ -18,6 +22,8 @@ btnPlay.addEventListener('click', init)
 //////////// FUNCTIONS ////////////
 
 function generateSquares (index, bIndex) {
+
+  // creazione quadrati
   const sq = document.createElement('div');
   sq.className = 'ad_square';
   grid.append(sq);
@@ -32,7 +38,13 @@ function generateSquares (index, bIndex) {
     sq.classList.add('medium')
     
   }
-  
+
+  /*
+  //CHEATS - DEBUG//
+  if (bIndex.includes(index)) {
+    sq.classList.add('bomb-cheats')
+  }
+  */
   
   // al click del singolo quadrato
   sq.addEventListener('click', function(){
@@ -40,7 +52,8 @@ function generateSquares (index, bIndex) {
     // controllo se è una bomba
     if (bIndex.includes(index)) {
       sq.classList.add('bomb')
-      endGame();
+      winCondition = false;
+      endGame(winCondition);
     }
     
     // se non è clicked e bomba contemporaneamente aumento il counter e aggiungo la classe clicked
@@ -48,6 +61,11 @@ function generateSquares (index, bIndex) {
       this.classList.add('clicked');
       counter++;
       console.log(index, counter);
+    }
+
+    if (counter === nGrid - arrayBombs.length) {
+      winCondition = true;
+      endGame(winCondition);
     }
     
   })
@@ -69,6 +87,7 @@ function init () {
 
 function reset () {
   grid.innerHTML = '';
+  message.innerHTML = '';
   counter = 0;
 }
 
@@ -92,7 +111,6 @@ function difficultyGrid () {
 function bombRandomizer () {
 
   arrayBombs = [];
-  const nBombs = 16;
   
   do {
     
@@ -108,6 +126,11 @@ function bombRandomizer () {
   return arrayBombs;
 }
 
-function endGame () {
+function endGame (cond) {
 
+  if (cond) {
+    message.innerHTML = `Hai Vinto! Punteggio: ${counter} su ${nGrid - nBombs}`;
+  } else {
+    message.innerHTML = `Hai Perso :( Punteggio: ${counter} su ${nGrid - nBombs}`;
+  }
 }
