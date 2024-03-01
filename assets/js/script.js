@@ -33,11 +33,7 @@ function generateSquares (index) {
   // al click del singolo quadrato
   sq.addEventListener('click', function(){
     
-    sq.classList.toggle('clicked');
-    
-    sq.innerHTML = (sq.classList.contains('clicked'))
-    ? sq.innerHTML = index
-    : sq.innerHTML = '';
+    sq.classList.add('clicked');
     
     console.log(index);
   })
