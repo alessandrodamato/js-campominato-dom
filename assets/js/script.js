@@ -132,6 +132,7 @@ function bombRandomizer () {
 function endGame (cond) {
   const blockScreen = document.createElement('div');
   blockScreen.className = 'ad_block';
+  grid.append(blockScreen);
 
   if (cond) {
     message.innerHTML = `Hai Vinto! Punteggio: ${counter} su ${nGrid - nBombs}`;
