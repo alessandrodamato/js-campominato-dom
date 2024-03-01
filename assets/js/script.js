@@ -6,6 +6,7 @@ const difficultyOption = document.getElementById('mode');
 let nGrid;
 let arrayBombs;
 let bombIndex;
+let counter = 0;
 
 // reset base
 reset();
@@ -32,17 +33,21 @@ function generateSquares (index, bIndex) {
     
   }
   
-  // controllo se è una bomba
-  if (bIndex.includes(index)) {
-    sq.classList.add('bomb')
-  }
-
+  
   // al click del singolo quadrato
   sq.addEventListener('click', function(){
+
+    // controllo se è una bomba
+    if (bIndex.includes(index)) {
+      sq.classList.add('bomb')
+      endGame();
+    }
     
-    if (!this.classList.contains('clicked')) {
+    // se non è clicked e bomba contemporaneamente aumento il counter e aggiungo la classe clicked
+    if (!this.classList.contains('clicked') && !this.classList.contains('bomb')) {
       this.classList.add('clicked');
-      console.log(index); // stessa cosa per il counter ////////////////////
+      counter++;
+      console.log(index, counter);
     }
     
   })
@@ -64,6 +69,7 @@ function init () {
 
 function reset () {
   grid.innerHTML = '';
+  counter = 0;
 }
 
 function difficultyGrid () {
@@ -100,4 +106,8 @@ function bombRandomizer () {
   console.log(arrayBombs);
 
   return arrayBombs;
+}
+
+function endGame () {
+
 }
