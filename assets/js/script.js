@@ -33,9 +33,11 @@ function generateSquares (index) {
   // al click del singolo quadrato
   sq.addEventListener('click', function(){
     
-    sq.classList.add('clicked');
+    if (!this.classList.contains('clicked')) {
+      this.classList.add('clicked');
+      console.log(index); // stessa cosa per il counter ////////////////////
+    }
     
-    console.log(index);
   })
   
 }
@@ -44,6 +46,7 @@ function init () {
   
   reset();
   nGrid = difficultyGrid();
+  bombRandomizer();
   for (let i = 1; i <= nGrid; i++) {
     generateSquares(i);
   }
@@ -69,4 +72,29 @@ function difficultyGrid () {
     return 100;
 
   }
+}
+
+function bombRandomizer () {
+
+  let arrayBombs = [];
+  const nBombs = 16;
+
+  while (arrayBombs.length === nBombs) {
+
+    randomNumber = numRandomizer();
+
+    if (!arrayBombs.includes(randomNumber)) {
+      arrayBombs.push(randomNumber);
+    }
+
+  }
+
+  console.log(arrayBombs);
+
+
+}
+
+function numRandomizer () {
+  const randomNumber = Math.ceil(Math.random() * nGrid);
+  return randomNumber;
 }
